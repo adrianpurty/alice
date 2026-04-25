@@ -1,12 +1,5 @@
-# Vercel Serverless - Production Dependencies
-grpcio>=1.50.0
-grpcio-tools>=1.50.0
-PyJWT>=2.8.0
+# NexTTS Serverless API Dependencies
 flask>=2.0
-numpy>=1.20
-torch>=2.0
-transformers>=4.30
-vercel>=0.0.3
 werkzeug>=2.0
 sqlalchemy>=2.0
 psycopg2-binary>=2.9
