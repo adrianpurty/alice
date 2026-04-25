@@ -6,7 +6,7 @@ import base64
 import os
 from typing import Any
 
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, Flask, jsonify, request
 
 try:
     from core.monitoring import metrics
@@ -306,3 +306,7 @@ def webhook():
         return jsonify({"error": "WebhookError", "message": str(e)}), 400
     except Exception as e:
         return _handle_error(e)
+
+
+app = Flask(__name__)
+app.register_blueprint(api, url_prefix="/api")
