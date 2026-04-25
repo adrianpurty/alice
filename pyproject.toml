@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "nexxtts"
+version = "0.1.0"
+description = "Voice AI Integration Platform - TTS & ASR"
+readme = "README.md"
+requires-python = ">=3.9"
+authors = [
+  { name="NexTTS Team" },
+]
+dependencies = [
+    "torch>=2.0",
+    "transformers>=4.30",
+    "numpy>=1.20",
+    "diffusers",
+    "accelerate",
+    "scipy",
+    "librosa",
+    "tqdm",
+    "prometheus_client",
+]
+
+[project.urls]
+Homepage = "https://github.com/microsoft/VibeVoice"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["nexxtts*", "vibevoice*", "vllm_plugin*", "cloud*", "core*"]
+
+[project.optional-dependencies]
+db = [
+    "sqlalchemy>=2.0",
+    "psycopg2-binary>=2.9",
+]
+test = [
+    "pytest>=7.0",
+    "pytest-asyncio>=0.21",
+]

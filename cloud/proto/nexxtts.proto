@@ -1,0 +1,79 @@
+syntax = "proto3";
+
+package nexxtts.v1;
+
+service NexTTS {
+  rpc StreamTTS(StreamTTSRequest) returns (stream AudioChunk);
+  rpc GenerateTTS(GenerateTTSRequest) returns (GenerateTTSResponse);
+  rpc Transcribe(TranscribeRequest) returns (TranscribeResponse);
+  rpc ListVoices(ListVoicesRequest) returns (ListVoicesResponse);
+  rpc CreateVoice(CreateVoiceRequest) returns (Voice);
+  rpc DeleteVoice(DeleteVoiceRequest) returns (Empty);
+}
+
+message StreamTTSRequest {
+  string text = 1;
+  string voice = 2;
+  int32 inference_steps = 3;
+  float temperature = 4;
+  float cfg_scale = 5;
+}
+
+message AudioChunk {
+  bytes pcm_data = 1;
+  int32 sample_rate = 2;
+  bool is_final = 3;
+}
+
+message GenerateTTSRequest {
+  string text = 1;
+  string voice = 2;
+  string format = 3;
+}
+
+message GenerateTTSResponse {
+  bytes audio_data = 1;
+  string format = 2;
+  int32 duration_sec = 3;
+}
+
+message TranscribeRequest {
+  bytes audio_data = 1;
+  map<string, string> hotwords = 2;
+  bool include_timestamps = 3;
+  bool include_speakers = 4;
+}
+
+message TranscribeResponse {
+  string text = 1;
+  repeated Segment segments = 2;
+  
+  message Segment {
+    float start = 1;
+    float end = 2;
+    string text = 3;
+    string speaker = 4;
+  }
+}
+
+message ListVoicesRequest {}
+
+message ListVoicesResponse {
+  repeated Voice voices = 1;
+}
+
+message CreateVoiceRequest {
+  string name = 1;
+  repeated bytes audio_samples = 2;
+}
+
+message DeleteVoiceRequest {
+  string name = 1;
+}
+
+message Voice {
+  string name = 1;
+  bool is_builtin = 2;
+}
+
+message Empty {}
