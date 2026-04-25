@@ -1,16 +1,4 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "cloud/serverless/vercel.py",
-      "use": "@vercel/python"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "cloud/serverless/vercel.py"
-    }
-  ],
-  "installCommand": "pip install -r requirements.txt"
+  "framework": null,
+  "buildCommand": "pip install -r requirements.txt"
 }
